@@ -1,0 +1,67 @@
+---
+export interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
+
+import { Button } from "@/components/ui/button"
+const heroImage = "https://www.figma.com/api/mcp/asset/7884dd8d-049a-4913-8940-695a5f84e4c0"
+---
+
+<section class:list={["grid grid-cols-1 items-end gap-10 lg:grid-cols-5 max-w-[1400px] mx-auto py-24  w-full", className]}>
+<div class="col-span-1 lg:col-span-3 flex flex-col items-start gap-5">
+    <span class="inline-flex items-center gap-3 text-sm font-mono text-foreground">
+        <span class="w-8 h-px bg-muted-foreground"></span>
+    Psicóloga Online</span>
+    <div class="flex w-full flex-col items-start ">
+      <div class="flex w-full  flex-col items-start justify-center">
+        <div class="relative flex w-full items-center gap-5">
+          <div class="relative size-[60px] shrink-0">
+            <img
+              src={heroImage}
+              alt="Retrato da psicóloga Larissa"
+              width="60"
+              height="60"
+              class="block size-full rounded-full object-cover"
+              loading="eager"
+            />
+            <div class="absolute left-[46px] bottom-0 flex size-[12px] items-center justify-center" aria-hidden="true">
+                <span class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500/60"></span>
+                <span class="relative inline-flex size-[9px] rounded-full border border-white bg-emerald-500"></span>
+              </div>
+          </div>
+  
+          <p class="min-w-0 flex-1 font-heading text-5xl md:text-6xl lg:text-7xl  font-medium tracking-[-2.4px] text-foreground">
+            <span class="font-heading italic font-light text-foreground">Olá</span><span class="text-foreground"
+              >,</span
+            >{" "}sinta-se
+          </p>
+  
+     
+        </div>
+      </div>
+  
+      <p class="min-w-full font-heading text-5xl md:text-6xl lg:text-7xl font-medium tracking-[-2.4px] text-foreground">
+        à vontade
+      </p>
+    </div>
+</div>
+
+  <div class="col-span-1 lg:col-span-2">
+    <p class="text-base text-muted-foreground leading-relaxed max-w-md mb-8">
+        Aqui é um espaço onde vou te auxiliar a encontrar melhores caminhos para sua tragetória,
+        <span class="font-medium text-foreground"> vamos lá?</span>
+      </p>
+      <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline">
+        <Button client:load variant="default" size="lg" nativeButton={false}>
+            Conhecer mais
+        </Button>
+      </a>
+      <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline">
+        <Button client:load variant="ghost" size="lg" nativeButton={false}>Marcar consulta</Button>
+      </a>
+     
+     
+  </div>
+</section>

@@ -1,0 +1,43 @@
+---
+import { Button } from "@/components/ui/button"
+
+export interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
+
+const links = [
+  { href: "#inicio", label: "Início" },
+  { href: "#quem-sou", label: "Quem sou" },
+  { href: "#perguntas-frequentes", label: "Perguntas Frequentes" },
+  { href: "#blog", label: "Blog" },
+] as const
+
+---
+
+<nav
+  class:list={[
+    "flex max-w-[1400px] w-full items-center rounded-full  mx-auto flex-row justify-between ",
+    className,
+  ]}
+  aria-label="Navegação principal"
+>
+<div class="flex flex-row items-center gap-4">
+    {
+        links.map(({ href, label }) => (
+          <a
+            href={href}
+            class="flex h-11 shrink-0 items-center justify-center px-3.5 font-heading text-base font-medium tracking-[-0.64px] text-[#0c090c] no-underline transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            {label}
+          </a>
+        ))
+      }
+</div>
+  <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline">
+    <Button client:load variant="default" size="lg" nativeButton={false}>
+      Marcar consulta
+    </Button>
+  </a>
+</nav>
