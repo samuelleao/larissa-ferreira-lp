@@ -6,25 +6,33 @@ export interface Props {
 const { class: className } = Astro.props
 
 const aboutParagraph =
-  "Sou psicóloga e acredito que cada pessoa carrega uma história única, cheia de significados, desafios e possibilidades. Meu trabalho é oferecer um espaço seguro, acolhedor e livre de julgamentos, onde você possa se escutar com mais clareza e construir novos caminhos para sua vida."
+  "Meu nome é Ana Larissa, <strong>mas pode me chamar de Lari</strong>. Sou psicóloga clínica e trabalho com a Terapia Cognitivo-Comportamental, uma abordagem baseada em evidências científicas."
+
+const aboutParagraph2 = "Iniciei minha atuação durante a pandemia, um período desafiador que reforçou ainda mais a importância do cuidado com a saúde mental. Foi nesse contexto que me conectei profundamente com o atendimento online, e desde então sigo atendendo pessoas de diferentes lugares, com acolhimento, ética e compromisso."
+
+const aboutParagraph3Bold = "Minha prática é personalizada."
+const aboutParagraph3 = "Acredito que cada pessoa tem uma história única, e por isso cada processo terapêutico também precisa ser construído de forma única.</p>"
+
+const aboutParagraph4 =
+  "Sou uma profissional <strong>acolhedora</strong>, <strong>autêntica</strong> e <strong>comprometida</strong> com o seu processo. Aqui, você encontra um espaço seguro para ser quem você é <strong>sem julgamentos</strong>, e com direção."
 ---
 
-<section class:list={["mx-auto w-full max-w-[1400px] px-6 py-20 md:py-24", className]}>
+<section class:list={["mx-auto w-full max-w-[1400px]  py-20 md:py-24", className]}>
   <div class="mx-auto flex-col w-full  items-start gap-12 lg:flex-row lg:gap-24">
     <div class="relative w-full max-w-xl mx-auto">
-      <span class="inline-flex items-center gap-3 text-sm font-mono text-foreground">
+      <span class="mb-4 mb4 inline-flex items-center gap-3 text-sm font-mono text-foreground">
         <span class="w-8 h-px bg-muted-foreground"></span>
     Sobre mim
       </span>
       <h2 class="font-heading text-4xl leading-tight tracking-[-0.04em] font-medium text-foreground md:text-5xl">Quem sou eu?</h2>
       <div class="mt-4 space-y-4 text-base leading-relaxed tracking-[-0.02em] text-muted-foreground mb-8">
-        <p>{aboutParagraph}</p>
+        <p set:html={aboutParagraph} class="[&_strong]:font-medium [&_strong]:text-foreground" />
       </div>
 
     
     </div>
     <div class="flex w-full  flex-1 flex-col gap-4">
-      <div class="h-[432px] w-full rounded-2xl bg-muted relative">
+      <div class="h-[432px] w-full rounded-2xl bg-muted relative  mx-auto">
         <!-- Imagem da psicóloga -->
         <img src="/about.png" alt="Larissa Ferreira" class="w-full h-full object-cover rounded-2xl">
         <!-- Nome da psicóloga por cima da imagem -->
@@ -40,9 +48,20 @@ const aboutParagraph =
 
     <div class="relative w-full max-w-xl mx-auto">
       <div class="mt-8 space-y-4 text-base leading-relaxed tracking-[-0.02em] text-muted-foreground mb-8">
-        <p>{aboutParagraph}</p>
+        <p class="text-balance">{aboutParagraph2}</p>
       </div>
 
+      <h2 class="font-heading text-4xl leading-tight tracking-[-0.04em] font-medium text-foreground md:text-4xl">
+        {aboutParagraph3Bold}
+      </h2>
+
+      <div class="mt-8 space-y-4 text-base leading-relaxed tracking-[-0.02em] text-muted-foreground mb-8">
+        <p set:html={ aboutParagraph3 } class="text-balance [&_strong]:font-medium! [&_strong]:text-foreground"/>
+      </div>
+
+      <div class="mt-8 space-y-4 text-base leading-relaxed tracking-[-0.02em] text-muted-foreground mb-8">
+        <p set:html={aboutParagraph4} class="text-balance [&_strong]:font-medium [&_strong]:text-foreground" />
+      </div>
     
     </div>
 
