@@ -1,0 +1,52 @@
+---
+export interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
+
+const aboutParagraph =
+  "Sou psicóloga e acredito que cada pessoa carrega uma história única, cheia de significados, desafios e possibilidades. Meu trabalho é oferecer um espaço seguro, acolhedor e livre de julgamentos, onde você possa se escutar com mais clareza e construir novos caminhos para sua vida."
+---
+
+<section class:list={["mx-auto w-full max-w-[1400px] px-6 py-20 md:py-24", className]}>
+  <div class="mx-auto flex-col w-full  items-start gap-12 lg:flex-row lg:gap-24">
+    <div class="relative w-full max-w-xl mx-auto">
+      <span class="inline-flex items-center gap-3 text-sm font-mono text-foreground">
+        <span class="w-8 h-px bg-muted-foreground"></span>
+    Sobre mim
+      </span>
+      <h2 class="font-heading text-4xl leading-tight tracking-[-0.04em] font-medium text-foreground md:text-5xl">Quem sou eu?</h2>
+      <div class="mt-4 space-y-4 text-base leading-relaxed tracking-[-0.02em] text-muted-foreground mb-8">
+        <p>{aboutParagraph}</p>
+      </div>
+
+    
+    </div>
+    <div class="flex w-full  flex-1 flex-col gap-4">
+      <div class="h-[432px] w-full rounded-2xl bg-muted relative">
+        <!-- Imagem da psicóloga -->
+        <img src="/about.png" alt="Larissa Ferreira" class="w-full h-full object-cover rounded-2xl">
+        <!-- Nome da psicóloga por cima da imagem -->
+        <div class=" absolute w-full z-10 bottom-8 lg:left-0 left-8">
+          <div class="flex  max-w-xl mx-auto items-center gap-2 text-base tracking-[-0.04em] text-foreground">
+            <span class="size-2 rounded-full bg-primary" aria-hidden="true"></span>
+            <span class="font-heading text-mauve-50">Larissa Ferreira</span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="relative w-full max-w-xl mx-auto">
+      <div class="mt-8 space-y-4 text-base leading-relaxed tracking-[-0.02em] text-muted-foreground mb-8">
+        <p>{aboutParagraph}</p>
+      </div>
+
+    
+    </div>
+
+    
+
+  </div>
+</section>

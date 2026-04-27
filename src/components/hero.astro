@@ -6,10 +6,11 @@ export interface Props {
 const { class: className } = Astro.props
 
 import { Button } from "@/components/ui/button"
+import { Backlight } from "./ui/backlight"
 const heroImage = "https://www.figma.com/api/mcp/asset/7884dd8d-049a-4913-8940-695a5f84e4c0"
 ---
 
-<section class:list={["grid grid-cols-1 items-end gap-10 lg:grid-cols-5 max-w-[1400px] mx-auto py-24  w-full", className]}>
+<div class:list={["grid grid-cols-1 items-end gap-10 lg:grid-cols-5 max-w-[1400px] mx-auto py-24  w-full", className]}>
 <div class="col-span-1 lg:col-span-3 flex flex-col items-start gap-5">
     <span class="inline-flex items-center gap-3 text-sm font-mono text-foreground">
         <span class="w-8 h-px bg-muted-foreground"></span>
@@ -64,4 +65,98 @@ const heroImage = "https://www.figma.com/api/mcp/asset/7884dd8d-049a-4913-8940-6
      
      
   </div>
-</section>
+
+
+
+</div>
+
+  
+<div class="max-w-[1400px] mx-auto w-full">
+  <div class="relative mx-auto aspect-video w-full overflow-hidden rounded-2xl" data-video-wrapper>
+    <img
+      src="/cover-video.png"
+      alt="Capa do video de apresentacao"
+      class="absolute inset-0 h-full w-full object-cover transition-opacity duration-300"
+      data-video-cover
+      loading="lazy"
+    />
+    <button
+      type="button"
+      class="absolute inset-0 z-10 flex items-center justify-center bg-black/30 text-white transition hover:bg-black/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+      data-video-play
+      aria-label="Assistir video"
+    >
+      <span class="rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-wide text-black shadow-lg">
+        Assistir
+      </span>
+    </button>
+    <iframe
+      id="hero-video-player"
+      class="absolute inset-0 h-full w-full rounded-2xl opacity-0 pointer-events-none transition-opacity duration-300"
+      src="https://www.youtube.com/embed/9CJLtzzUphU?enablejsapi=1&rel=0"
+      title="Video de apresentacao"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const wrapper = document.querySelector("[data-video-wrapper]");
+    if (!wrapper) return;
+
+    const cover = wrapper.querySelector("[data-video-cover]");
+    const playButton = wrapper.querySelector("[data-video-play]");
+    const iframe = wrapper.querySelector("#hero-video-player");
+    if (!cover || !playButton || !iframe) return;
+
+    const showCover = () => {
+      cover.classList.remove("opacity-0");
+      playButton.classList.remove("opacity-0", "pointer-events-none");
+      iframe.classList.add("opacity-0", "pointer-events-none");
+    };
+
+    const showVideo = () => {
+      cover.classList.add("opacity-0");
+      playButton.classList.add("opacity-0", "pointer-events-none");
+      iframe.classList.remove("opacity-0", "pointer-events-none");
+    };
+
+    let player;
+    const initPlayer = () => {
+      if (!window.YT?.Player || player) return;
+
+      player = new window.YT.Player("hero-video-player", {
+        events: {
+          onStateChange: (event) => {
+            if (
+              event.data === window.YT.PlayerState.PAUSED ||
+              event.data === window.YT.PlayerState.ENDED
+            ) {
+              showCover();
+            }
+          },
+        },
+      });
+    };
+
+    playButton.addEventListener("click", () => {
+      showVideo();
+      initPlayer();
+      player?.playVideo?.();
+    });
+
+    if (window.YT?.Player) {
+      initPlayer();
+      return;
+    }
+
+    window.onYouTubeIframeAPIReady = initPlayer;
+    const script = document.createElement("script");
+    script.src = "https://www.youtube.com/iframe_api";
+    script.async = true;
+    document.head.appendChild(script);
+  })();
+</script>

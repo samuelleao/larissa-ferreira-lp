@@ -2,6 +2,11 @@
 
 This is a template for a new Astro project with React, TypeScript, and shadcn/ui.
 
+## Design System rule
+
+When implementing sections from Figma, do not use arbitrary values for spacing, radius, typography, or colors.
+Always prefer the closest available values from the shadcn design system (tokens, utilities, and existing component variants) and only deviate when there is no equivalent token.
+
 ## Adding components
 
 To add components to your app, run the following command:

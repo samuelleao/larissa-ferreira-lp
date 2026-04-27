@@ -1,0 +1,63 @@
+---
+export interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
+const avatarImage = "https://www.figma.com/api/mcp/asset/3e8fc2fb-5775-4700-a439-f0e1bf1a3d26"
+---
+
+<section class:list={["max-w-[1400px] mx-auto w-full py-16 md:py-40", className]}>
+  <div class="flex  flex-col items-start justify-between gap-10 lg:flex-row lg:items-center lg:gap-[59px]">
+   <div class="max-w-[562px] mx-auto">
+    <span class="inline-flex items-center gap-3 text-sm font-mono text-foreground">
+      <span class="w-8 h-px bg-muted-foreground"></span>
+  Emoções</span>
+    <p class="max-w-[562px] font-heading font-medium text-4xl leading-tight tracking-[-1.92px] text-foreground md:text-5xl">
+      Se você chegou até aqui, talvez esteja
+    </p>
+    <span class="font-light italic text-muted-foreground"> carregando muita coisa...</span>
+
+
+    <div class="w-full max-w-[513px] mt-10">
+      <div class="flex items-start gap-2.5">
+        <img
+          src={avatarImage}
+          alt="Avatar da psicóloga"
+          width="60"
+          height="60"
+          class="h-[60px] w-[60px] shrink-0 mt-4"
+          loading="lazy"
+        />
+
+        <div class="flex min-w-0 flex-1 flex-col justify-center rounded-xl bg-white/10 px-5 py-4 backdrop-blur-[32px]">
+          <p class="mb-4 text-[19px] leading-6 font-semibold text-foreground">Isso soa familiar?</p>
+
+          <ul class="flex flex-wrap gap-x-3 gap-y-2">
+            <li class="h-[22px] rounded-full border border-zinc-200 bg-white px-2.5 text-xs leading-[22px] font-semibold text-foreground">
+              Cansaço constante
+            </li>
+            <li class="h-[22px] rounded-full border border-zinc-200 bg-white px-2.5 text-xs leading-[22px] font-semibold text-foreground">
+              Se cobrar demais
+            </li>
+            <li class="h-[22px] rounded-full border border-zinc-200 bg-white px-2.5 text-xs leading-[22px] font-semibold text-foreground">
+              Medo do futuro
+            </li>
+            <li class="h-[22px] rounded-full border border-zinc-200 bg-white px-2.5 text-xs leading-[22px] font-semibold text-foreground">
+              Incerteza
+            </li>
+            <li class="h-[22px] rounded-full border border-zinc-200 bg-white px-2.5 text-xs leading-[22px] font-semibold text-foreground">
+              Sensação de esgotamento
+            </li>
+            <li class="h-[22px] rounded-full border border-zinc-200 bg-white px-2.5 text-xs leading-[22px] font-semibold text-foreground">
+              Ansiedade
+            </li>
+            <li class="h-[22px] rounded-full border border-zinc-200 bg-white px-2.5 text-xs leading-[22px] font-semibold text-foreground">
+              Crises de ansiedade
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
