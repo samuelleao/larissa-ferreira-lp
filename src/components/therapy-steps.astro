@@ -1,0 +1,66 @@
+---
+export interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
+
+const steps = [
+  {
+    title: "Primeiro contato",
+    description:
+      "Um espaço inicial para entender o que você está vivendo, tirar dúvidas e ver se a terapia faz sentido para você — sem pressão.",
+  },
+  {
+    title: "Construção do vínculo",
+    description:
+      "Aos poucos, criamos um espaço seguro onde você pode se expressar com liberdade, no seu tempo e do seu jeito.",
+  },
+  {
+    title: "Entendimento e aprofundamento",
+    description:
+      "Exploramos padrões, emoções e situações que impactam sua vida, trazendo mais clareza sobre o que você sente e vive.",
+  },
+  {
+    title: "Mudanças e novos caminhos",
+    description:
+      "Com mais consciência, você começa a desenvolver novas formas de lidar com desafios e construir uma vida mais leve e alinhada.",
+  },
+] as const
+---
+
+<section id="processo" class:list={["mx-auto w-full max-w-[1400px] py-16 md:py-24 lg:py-[98px] bg-mauve-600/10 rounded-2xl -translate-y-50 backdrop-blur-2xl px-4", className]}>
+  <div class="flex flex-col items-center gap-14 md:gap-20 lg:gap-[100px]">
+   <div class="flex flex-col items-center gap-4">
+    <span class="inline-flex items-center gap-3 text-sm font-mono text-foreground">
+      <span class="h-px w-8 bg-muted-foreground"></span>
+      Processo
+    </span>
+
+    <h2 class="w-full font-medium max-w-[681px] text-center font-heading text-3xl leading-tight tracking-[-1.2px] text-foreground md:text-4xl md:tracking-[-1.6px] lg:text-[48px] lg:tracking-[-1.92px]">
+      <span class="font-heading font-light italic text-muted-foreground">Seu caminho</span>{" "}
+      na terapia,
+      <br class="hidden lg:block" />
+      <span class="lg:hidden"> </span>
+      passo a passo
+    </h2>
+   </div>
+
+    <div class="flex w-full max-w-[874px] flex-col items-start gap-16 md:gap-20 lg:gap-[108px]">
+      {
+        steps.map((step, index) => (
+          <div class:list={["flex w-full flex-col items-center gap-8 md:gap-12 lg:gap-[74px]", index % 2 === 1 && "lg:flex-row-reverse", index % 2 === 0 && "lg:flex-row"]}>
+            <div class="h-[240px] w-full max-w-[400px] shrink-0 rounded-2xl bg-[#f3f1f3] md:h-[300px] lg:h-[360px]" aria-hidden="true"></div>
+
+            <div class="flex w-full max-w-[399px] shrink-0 flex-col items-center gap-[15px] text-center leading-normal">
+              <p class="w-full font-heading text-[20px] font-semibold tracking-[-0.8px] text-foreground md:text-[20px]">
+                {step.title}
+              </p>
+              <p class="w-full max-w-[320px] text-[16px] tracking-[-0.64px] text-muted-foreground">{step.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

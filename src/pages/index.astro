@@ -1,19 +1,32 @@
 ---
 import Layout from "@/layouts/main.astro"
-import { Button } from "@/components/ui/button"
 import Menu from "@/components/menu.astro"
 import Hero from "@/components/hero.astro"
 import EmotionalSigns from "@/components/emotional-signs.astro"
 import AboutMe from "@/components/about-me.astro"
+import ApproachSection from "@/components/approach-section.astro"
+import TherapySteps from "@/components/therapy-steps.astro"
+import OnlineTherapyBenefits from "@/components/online-therapy-benefits.astro"
+import FaqSection from "@/components/faq-section.astro"
+import BlogPostsSection from "@/components/blog-posts-section.astro"
+import Footer from "@/components/footer.astro"
 ---
 
 <Layout>
-  <div class="flex min-h-svh p-6">
+  <div class="flex min-h-svh">
     <div class="flex min-w-0 flex-col gap-4 text-sm leading-loose w-full ">
-      <Menu class="mb-6 hidden md:flex" />
-      <Hero />
+      <div class="relative">
+        <Menu class="absolute left-1/2 top-6 z-30 hidden w-[calc(100%-3rem)] -translate-x-1/2 md:flex" />
+        <Hero />
+      </div>
       <EmotionalSigns />
       <AboutMe />
+      <ApproachSection />
+      <TherapySteps />
+      <OnlineTherapyBenefits />
+      <FaqSection />
+      <BlogPostsSection />
+      <Footer />
     </div>
   </div>
 </Layout>

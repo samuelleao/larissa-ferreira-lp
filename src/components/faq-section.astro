@@ -1,0 +1,141 @@
+---
+import { ChevronDown } from "lucide-react"
+
+export interface Props {
+  class?: string
+}
+
+const { class: className } = Astro.props
+
+const faqs = [
+  {
+    question: "Como sei se preciso de terapia?",
+    answer:
+      "Se algo tem te incomodado com frequência, seja ansiedade, tristeza, conflitos, dificuldade de tomar decisões ou lidar com emoções, a terapia pode te ajudar. Você não precisa “estar no limite” para começar. A terapia também é um espaço de autoconhecimento e desenvolvimento pessoal.",
+  },
+  {
+    question: "Quanto tempo dura o tratamento?",
+    answer:
+      "A duração varia de pessoa para pessoa. Algumas demandas são mais pontuais, outras exigem um acompanhamento mais contínuo. Ao longo das primeiras sessões, construímos juntos um plano terapêutico com objetivos claros.",
+  },
+  {
+    question: "A terapia funciona mesmo?",
+    answer:
+      "Sim. A Terapia Cognitivo-Comportamental é uma abordagem baseada em evidências científicas, com eficácia comprovada para diversas demandas, como ansiedade, depressão, autoestima, entre outras. Mas o resultado também depende do envolvimento no processo.",
+  },
+  {
+    question: "Preciso falar sobre tudo logo no início?",
+    answer:
+      "Não. Você pode compartilhar no seu tempo. A terapia respeita o seu ritmo, o vínculo e a confiança são construídos ao longo das sessões.",
+  },
+  {
+    question: "Quanto tempo dura cada sessão?",
+    answer: "Cada sessão tem duração média de 50 minutos.",
+  },
+  {
+    question: "Com que frequência acontecem?",
+    answer:
+      "Geralmente, as sessões são semanais, especialmente no início. Com o avanço do processo, podemos espaçar para quinzenais ou mensais.",
+  },
+  {
+    question: "As sessões são online ou presenciais?",
+    answer: "Atualmente, os atendimentos são realizados de forma online, com toda segurança, sigilo e conforto.",
+  },
+  {
+    question: "O que acontece em uma sessão de terapia?",
+    answer:
+      "Cada sessão segue uma estrutura, mas sempre adaptada à sua necessidade. Conversamos sobre sua semana, emoções, pensamentos e situações importantes. Também utilizamos técnicas práticas para te ajudar a lidar melhor com o que está vivendo.",
+  },
+  {
+    question: "Qual o valor da sessão?",
+    answer: "Os valores são informados diretamente no contato inicial, para que possamos alinhar da melhor forma.",
+  },
+  {
+    question: "Existe pacote mensal?",
+    answer: "Sim, há a opção de pacote mensal com valor diferenciado para quem realiza sessões semanais.",
+  },
+  {
+    question: "Como funciona o pagamento?",
+    answer: "O pagamento é realizado antecipadamente, via PIX, garantindo a reserva do horário.",
+  },
+  {
+    question: "Posso remarcar uma sessão?",
+    answer:
+      "Sim, desde que a remarcação seja solicitada com pelo menos 24 horas de antecedência. Caso contrário, a sessão é considerada realizada.",
+  },
+  {
+    question: "O que eu falar fica em sigilo?",
+    answer:
+      "Sim. O sigilo é um princípio ético fundamental da psicologia. Tudo o que é compartilhado na sessão é tratado com total confidencialidade.",
+  },
+  {
+    question: "E se eu não me sentir confortável?",
+    answer:
+      "Isso pode acontecer, principalmente no início. Podemos conversar sobre isso na própria sessão, ajustando o processo para que você se sinta mais à vontade.",
+  },
+  {
+    question: "Posso parar a terapia quando quiser?",
+    answer:
+      "Sim. A terapia é um processo seu. Sempre que desejar interromper, podemos conversar sobre isso e fazer um fechamento adequado.",
+  },
+  {
+    question: "Em quanto tempo vou me sentir melhor?",
+    answer:
+      "Isso varia. Algumas pessoas percebem mudanças já nas primeiras semanas, outras levam mais tempo. O importante é que o processo acontece de forma consistente e respeitando seu ritmo.",
+  },
+  {
+    question: "A terapia ajuda com ansiedade e depressão?",
+    answer:
+      "Sim. A Terapia Cognitivo-Comportamental é uma das abordagens mais indicadas para o tratamento de ansiedade e depressão, entre outras questões emocionais.",
+  },
+  {
+    question: "Vou receber tarefas ou atividades?",
+    answer:
+      "Sim, em muitos momentos. As atividades entre sessões fazem parte do processo e ajudam a levar o que trabalhamos na terapia para o seu dia a dia.",
+  },
+] as const
+---
+
+<section
+  id="perguntas-frequentes"
+  class:list={[
+    "mx-auto w-full max-w-[1400px] rounded-2xl px-6 py-16 md:px-10 md:py-24 lg:px-14 lg:py-[98px]",
+    className,
+  ]}
+>
+  <div class="grid w-full grid-cols-1 gap-12 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:gap-16">
+    <div class="max-w-[420px] lg:sticky lg:top-24 lg:self-start">
+      <div class="flex flex-col gap-4">
+        <span class="inline-flex items-center gap-3 text-sm font-mono text-foreground">
+          <span class="h-px w-8 bg-muted-foreground"></span>
+          Perguntas Frequentes
+        </span>
+        <h2 class="font-heading text-4xl font-medium leading-tight tracking-[-1.2px] text-foreground md:text-5xl md:tracking-[-1.8px]">
+          Temos as respostas que você está procurando
+        </h2>
+      </div>
+      <div class="mt-8 overflow-hidden rounded-2xl">
+        <img
+          src="/about.png"
+          alt="Larissa Ferreira"
+          loading="lazy"
+          class="h-[360px] w-full object-cover md:h-[420px]"
+        />
+      </div>
+    </div>
+
+    <div class="divide-y divide-border px-6 md:px-8">
+      {
+        faqs.map((item, index) => (
+          <details class="group py-5" open={index === 0}>
+            <summary class="flex cursor-pointer list-none items-start justify-between gap-4 text-left [&::-webkit-details-marker]:hidden">
+              <span class="text-lg font-medium leading-7 tracking-[-0.4px] text-foreground">{item.question}</span>
+              <ChevronDown className="mt-1 size-5 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180" aria-hidden="true" />
+            </summary>
+            <p class="pt-4 text-base leading-7 text-muted-foreground">{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
