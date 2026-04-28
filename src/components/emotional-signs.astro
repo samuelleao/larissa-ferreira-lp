@@ -26,17 +26,17 @@ const emotionalSigns = [
 ]
 ---
 
-<section class:list={["max-w-[1400px] mx-auto w-full py-16 md:py-40 px-4", className]}>
+<section id="emocoes" class:list={["max-w-[1400px] mx-auto w-full py-16 md:py-40 px-4", className]}>
   <div class="flex  flex-col items-start justify-between gap-10 lg:flex-row lg:items-center lg:gap-[59px]">
    <div class="max-w-[562px] mx-auto">
-    <span class="mb-4 inline-flex items-center gap-3 text-sm font-mono text-foreground">
+    <span class="mb-4 inline-flex items-center gap-3 text-sm font-mono text-foreground reveal" data-reveal style="--reveal-delay: 20ms;">
       <span class="w-8 h-px bg-muted-foreground"></span>
       Emoções
     </span>
-    <p class="max-w-[562px] font-heading font-medium text-4xl leading-tight tracking-[-1.92px] text-foreground md:text-5xl">
+    <p class="max-w-[562px] font-heading font-medium text-4xl leading-tight tracking-[-1.92px] text-foreground md:text-5xl reveal" data-reveal style="--reveal-delay: 120ms;">
       Se você chegou até aqui, talvez esteja
     </p>
-    <span class="font-light italic text-muted-foreground"> carregando muita coisa...</span>
+    <span class="font-light  text-2xl italic text-muted-foreground reveal" data-reveal style="--reveal-delay: 200ms;"> carregando muita coisa...</span>
 
 
     <div class="w-full mt-10">
@@ -46,17 +46,23 @@ const emotionalSigns = [
           alt="Avatar da psicóloga"
           width="60"
           height="60"
-          class="h-[60px] w-[60px] shrink-0 mt-4"
+          class="h-[60px] w-[60px] shrink-0 mt-4 reveal"
+          data-reveal
+          style="--reveal-delay: 300ms;"
           loading="lazy"
         />
 
-        <div class="flex min-w-0 flex-1 flex-col justify-center rounded-xl bg-white/10 px-5 py-4 backdrop-blur-[32px]">
-          <p class="mb-4 text-[19px] leading-6 font-semibold text-foreground">Isso soa familiar?</p>
+        <div class="flex min-w-0 flex-1 flex-col justify-center rounded-xl bg-white/10 px-5 py-4 backdrop-blur-[32px] reveal" data-reveal style="--reveal-delay: 380ms;">
+          <p class="mb-4 text-[19px] leading-6 font-semibold text-foreground reveal" data-reveal style="--reveal-delay: 460ms;">Isso soa familiar?</p>
 
           <ul class="flex flex-wrap gap-x-3 gap-y-2">
-            {emotionalSigns.map((item) => (
-              <li class="inline-flex min-h-[24px] items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-xs leading-tight font-semibold text-foreground">
-                <item.icon className="size-3.5 shrink-0 text-muted-foreground" aria-hidden="true" />
+            {emotionalSigns.map((item, index) => (
+              <li
+                class="inline-flex min-h-[24px] items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-xs leading-tight font-semibold text-foreground reveal"
+                data-reveal
+                style={`--reveal-delay: ${560 + index * 110}ms;`}
+              >
+                <item.icon className="size-3.5 shrink-0 text-muted-foreground icon-draw" aria-hidden="true" />
                 <span>{item.label}</span>
               </li>
             ))}
@@ -66,3 +72,117 @@ const emotionalSigns = [
     </div>
   </div>
 </section>
+
+<style>
+  #emocoes .reveal {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0) scale(0.985);
+    transition:
+      opacity 560ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+      transform 560ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  #emocoes .reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  #emocoes .icon-draw.is-draw-ready :is(path, line, polyline, polygon, circle, rect, ellipse) {
+    stroke-dasharray: var(--stroke-length, 1);
+    stroke-dashoffset: var(--stroke-length, 1);
+    transition: none;
+  }
+
+  #emocoes .reveal.is-visible .icon-draw.is-draw-ready :is(path, line, polyline, polygon, circle, rect, ellipse) {
+    stroke-dashoffset: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #emocoes .reveal,
+    #emocoes .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    #emocoes .icon-draw.is-draw-ready :is(path, line, polyline, polygon, circle, rect, ellipse) {
+      stroke-dasharray: none;
+      stroke-dashoffset: 0;
+      transition: none;
+    }
+
+  }
+</style>
+
+<script>
+  (() => {
+    type WindowWithReveal = Window & { __landingRevealObserver?: IntersectionObserver };
+    const globalWindow = window as WindowWithReveal;
+    const targets = document.querySelectorAll("#emocoes [data-reveal]");
+    if (!targets.length) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      targets.forEach((node) => node.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = globalWindow.__landingRevealObserver;
+    if (!observer) {
+      targets.forEach((node) => node.classList.add("is-visible"));
+      return;
+    }
+
+    const setupIconDraw = (icon: SVGElement, delayMs: number) => {
+      const shapes = icon.querySelectorAll<SVGGeometryElement>("path, line, polyline, polygon, circle, rect, ellipse");
+      if (!shapes.length) return;
+
+      let hasMeasuredShape = false;
+      shapes.forEach((shape) => {
+        try {
+          const length = Math.max(shape.getTotalLength(), 1);
+          shape.style.setProperty("--stroke-length", `${length}`);
+          shape.style.strokeDasharray = `${length}`;
+          shape.style.strokeDashoffset = `${length}`;
+          hasMeasuredShape = true;
+        } catch {
+          /* ignore non-measurable shape */
+        }
+      });
+
+      if (!hasMeasuredShape) return;
+      icon.classList.add("is-draw-ready");
+
+      requestAnimationFrame(() => {
+        shapes.forEach((shape) => {
+          shape.style.transition = `stroke-dashoffset 700ms cubic-bezier(0.22, 1, 0.36, 1) ${delayMs}ms`;
+          shape.style.strokeDashoffset = "0";
+        });
+      });
+    };
+
+    document.querySelectorAll<HTMLElement>("#emocoes li[data-reveal]").forEach((item) => {
+      const delay = Number.parseInt(item.style.getPropertyValue("--reveal-delay") || "0", 10) + 120;
+      const runDraw = () => {
+        if (item.dataset.drawDone === "1") return;
+        item.dataset.drawDone = "1";
+        item.querySelectorAll<SVGElement>(".icon-draw").forEach((icon) => setupIconDraw(icon, delay));
+      };
+
+      if (item.classList.contains("is-visible")) {
+        runDraw();
+        return;
+      }
+
+      const classObserver = new MutationObserver(() => {
+        if (!item.classList.contains("is-visible")) return;
+        classObserver.disconnect();
+        runDraw();
+      });
+
+      classObserver.observe(item, { attributes: true, attributeFilter: ["class"] });
+    });
+
+    targets.forEach((node) => observer.observe(node));
+  })();
+</script>

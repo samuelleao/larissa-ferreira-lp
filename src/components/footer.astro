@@ -3,6 +3,7 @@ export interface Props {
   class?: string
 }
 
+import { Button } from "./ui/button"
 const { class: className } = Astro.props
 
 const currentYear = new Date().getFullYear()
@@ -26,37 +27,36 @@ const supportLinks = [
 
   <section id="contato" class="border-y border-black/10 px-6 py-10 md:px-10">
     <div id="marcar-consulta" class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-      <div class="max-w-xl">
-        <p class="text-xs uppercase tracking-[0.2em] text-zinc-400">Contato</p>
+      <div class="landing-reveal max-w-xl" data-reveal style="--reveal-delay: 20ms;">
         <h2 class="mt-2 font-heading text-2xl font-medium text-black md:text-3xl">Vamos iniciar seu processo terapêutico?</h2>
-        <p class="mt-2 text-sm text-zinc-300">
+        <p class="mt-2 text-sm text-muted-foreground">
           Se você sentiu que este espaço faz sentido para o seu momento, o próximo passo é agendar a primeira conversa.
         </p>
       </div>
-      <a
-        href="#inicio"
-        class="inline-flex items-center justify-center rounded-full border border-black/20 bg-black px-6 py-3 text-sm font-semibold text-zinc-900 no-underline transition hover:bg-zinc-200"
-      >
+      <Button 
+      variant="default"
+      size="lg"
+      className="">
         Quero agendar minha sessão
-      </a>
+      </Button>
     </div>
   </section>
 
   <div class="grid gap-8 px-6 py-10 md:grid-cols-3 md:px-10">
-    <div>
+    <div class="landing-reveal" data-reveal style="--reveal-delay: 40ms;">
       <p class="text-lg font-semibold text-black">Larissa Ferreira</p>
-      <p class="mt-2 max-w-sm text-sm leading-relaxed text-zinc-400">
+      <p class="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
         Psicóloga clínica com atendimento online, acolhedor e baseado em Terapia Cognitivo-Comportamental.
       </p>
     </div>
 
-    <div>
+    <div class="landing-reveal" data-reveal style="--reveal-delay: 100ms;">
       <p class="text-sm font-semibold text-mauve-600">Navegação</p>
       <ul class="mt-3 space-y-2">
         {
           navigationLinks.map((item) => (
             <li>
-              <a href={item.href} class="text-sm text-zinc-400 no-underline transition hover:text-mauve-600">
+              <a href={item.href} class="text-sm text-muted-foreground no-underline transition hover:text-mauve-600">
                 {item.label}
               </a>
             </li>
@@ -65,13 +65,13 @@ const supportLinks = [
       </ul>
     </div>
 
-    <div>
+    <div class="landing-reveal" data-reveal style="--reveal-delay: 160ms;">
       <p class="text-sm font-semibold text-mauve-600">Informações úteis</p>
       <ul class="mt-3 space-y-2">
         {
           supportLinks.map((item) => (
             <li>
-              <a href={item.href} class="text-sm text-zinc-400 no-underline transition hover:text-mauve-600">
+              <a href={item.href} class="text-sm text-muted-foreground no-underline transition hover:text-mauve-600">
                 {item.label}
               </a>
             </li>
@@ -81,8 +81,13 @@ const supportLinks = [
     </div>
   </div>
 
-  <div class="flex flex-col gap-2 border-t border-black/10 px-6 py-4 text-xs text-zinc-500 md:flex-row md:items-center md:justify-between md:px-10">
+  <div class="landing-reveal flex flex-col gap-2 border-t border-black/10 px-6 py-4 text-xs text-zinc-500 md:flex-row md:items-center md:justify-between md:px-10" data-reveal style="--reveal-delay: 80ms;">
     <p>© {currentYear} Larissa Ferreira. Todos os direitos reservados.</p>
     <a href="#inicio" class="text-zinc-500 no-underline transition hover:text-mauve-600">Voltar ao topo</a>
   </div>
 </footer>
+
+<script>
+  import { observeRevealsIn } from "@/lib/landing-reveal"
+  observeRevealsIn("footer")
+</script>

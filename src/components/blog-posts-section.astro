@@ -13,21 +13,23 @@ const { class: className } = Astro.props
 <section id="blog" class:list={["mx-auto w-full max-w-[1400px] bg-[#f5f5f5] py-16 md:py-24 lg:py-[98px] rounded-2xl backdrop-blur-2xl px-4", className]}>
   <div class="mx-auto flex w-full max-w-[960px] flex-col items-center">
     <div class="flex w-full max-w-[768px] flex-col items-center gap-4 text-center">
-      <span class="inline-flex items-center gap-3 text-sm font-mono text-foreground">
+      <span class="landing-reveal inline-flex items-center gap-3 text-sm font-mono text-foreground" data-reveal style="--reveal-delay: 20ms;">
         <span class="h-px w-8 bg-muted-foreground"></span>
         Blog
       </span>
-      <h2 class="font-heading text-4xl font-medium leading-tight tracking-[-1.2px] text-foreground md:text-[36px]">
+      <h2 class="landing-reveal font-heading text-4xl font-medium leading-tight tracking-[-1.2px] text-foreground md:text-[36px]" data-reveal style="--reveal-delay: 100ms;">
         Alguns conteudos para voce
       </h2>
-      <p class="text-base leading-6 text-muted-foreground">Explore os caminhos da mente e do comportamento</p>
+      <p class="landing-reveal text-base leading-6 text-muted-foreground" data-reveal style="--reveal-delay: 180ms;">Explore os caminhos da mente e do comportamento</p>
     </div>
 
     <div class="grid w-full grid-cols-1 gap-4 py-12 md:grid-cols-3 md:py-20">
       {
-        posts.map((post) => (
-          <article class="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card p-2">
-            <img src={post.imageUrl} alt={post.title} loading="lazy" class="aspect-video w-full rounded-lg object-cover" />
+        posts.map((post, index) => (
+          <article class="landing-reveal flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card p-2" data-reveal style={`--reveal-delay: ${220 + index * 90}ms;`}>
+            <div class="landing-reveal-media overflow-hidden rounded-lg" data-reveal-media style={`--reveal-delay: ${260 + index * 90}ms;`}>
+              <img src={post.imageUrl} alt={post.title} loading="lazy" class="landing-reveal-media__img aspect-video w-full rounded-lg object-cover" />
+            </div>
 
             <div class="flex h-full flex-col gap-1 px-3 pb-4 pt-2">
               <h3 class="font-heading text-base font-semibold leading-6 tracking-[-0.64px] text-foreground">
@@ -38,14 +40,16 @@ const { class: className } = Astro.props
 
               <div class="mt-auto flex items-center justify-between gap-3">
                 <div class="flex items-center gap-3">
-                  <img
-                    src={post.avatarUrl}
-                    alt={`Avatar de ${post.author}`}
-                    width="40"
-                    height="40"
-                    loading="lazy"
-                    class="size-10 rounded-full object-cover"
-                  />
+                  <div class="landing-reveal-media size-10 shrink-0 overflow-hidden rounded-full" data-reveal-media style={`--reveal-delay: ${300 + index * 90}ms;`}>
+                    <img
+                      src={post.avatarUrl}
+                      alt={`Avatar de ${post.author}`}
+                      width="40"
+                      height="40"
+                      loading="lazy"
+                      class="landing-reveal-media__img size-10 rounded-full object-cover"
+                    />
+                  </div>
                   <span class="text-base font-medium leading-6 text-foreground">{post.author}</span>
                 </div>
 
@@ -59,9 +63,17 @@ const { class: className } = Astro.props
       }
     </div>
 
-    <Button variant="default" size="lg" className="h-9 rounded-full px-4 text-sm">
-      Ver todos os posts
-      <ArrowRight className="size-4" aria-hidden="true" />
-    </Button>
+    <div class="landing-reveal flex w-full justify-center" data-reveal style="--reveal-delay: 120ms;">
+      <Button variant="default" size="lg" className="h-9 rounded-full px-4 text-sm">
+        Ver todos os posts
+        <ArrowRight className="icon-draw size-4" aria-hidden="true" />
+      </Button>
+    </div>
   </div>
 </section>
+
+<script>
+  import { observeRevealsIn, initIconDrawIn } from "@/lib/landing-reveal"
+  observeRevealsIn("#blog")
+  initIconDrawIn("#blog")
+</script>

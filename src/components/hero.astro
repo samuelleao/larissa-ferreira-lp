@@ -11,9 +11,9 @@ const { class: className } = Astro.props
 
 <section
   id="inicio"
-  class:list={["relative left-1/2 w-screen -translate-x-1/2", className]}
+  class:list={["js-reveal-root relative left-1/2 w-screen -translate-x-1/2", className]}
 >
-  <div class="relative min-h-[calc(100svh+10rem)] overflow-hidden">
+  <div class="relative min-h-[calc(50dvh)] md:min-h-[calc(100dvh+10rem)] overflow-hidden">
     <img
       src="/cover-video.png"
       alt="Imagem de destaque do atendimento online"
@@ -28,20 +28,32 @@ const { class: className } = Astro.props
       <div class="mx-auto flex max-w-4xl flex-col items-center text-center">
       
 
-        <h1 class="font-heading text-5xl font-medium tracking-[-2px] text-white md:text-6xl lg:text-7xl">
+        <h1
+          class="font-heading text-5xl font-medium tracking-[-2px] text-white md:text-6xl lg:text-7xl reveal"
+          data-reveal
+          style="--reveal-delay: 40ms;"
+        >
           <span class="font-heading italic font-light">Olá</span>, sinta-se
           <br />
           à vontade
         </h1>
 
-        <p class="mt-6 max-w-xl text-sm leading-relaxed text-white/85 md:text-base w-[340px]">
+        <p
+          class="mt-6 max-w-xl text-balance text-sm leading-relaxed text-white/85 md:text-base w-[340px] reveal"
+          data-reveal
+          style="--reveal-delay: 180ms;"
+        >
           Aqui é um espaço onde vou te auxiliar a encontrar melhores caminhos
         </p>
 
       </div>
 
-      <div class="mx-auto my-8 w-full max-w-2xl rounded-xl border border-white/5 bg-black/10 p-3 backdrop-blur-md md:flex md:items-center md:justify-between md:gap-4">
-        <p class="mb-3 text-center text-sm text-white/90 md:mb-0 md:text-left">
+      <div
+        class="mx-auto my-8 w-full max-w-2xl rounded-xl border border-white/5 bg-black/10 p-4 md:p-3 backdrop-blur-md md:flex md:items-center md:justify-between md:gap-4 reveal"
+        data-reveal
+        style="--reveal-delay: 280ms;"
+      >
+        <p class="mb-3 text-center text-balance text-sm text-white/90 md:mb-0 md:text-left">
           Atendimento online com acolhimento e clareza para o seu processo.
         </p>
         <div class="flex items-center justify-center gap-2 md:justify-end">
@@ -63,3 +75,67 @@ const { class: className } = Astro.props
   <div class="bg-white h-10 rounded-t-3xl w-full absolute bottom-0 "></div>
 
 </section>
+
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.985);
+    filter: blur(2px);
+    transition:
+      opacity 620ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+      transform 620ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+      filter 560ms ease-out var(--reveal-delay, 0ms);
+    will-change: opacity, transform, filter;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    type WindowWithReveal = Window & { __landingRevealObserver?: IntersectionObserver };
+    const globalWindow = window as WindowWithReveal;
+    const targets = document.querySelectorAll("#inicio [data-reveal]");
+    if (!targets.length) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      targets.forEach((node) => node.classList.add("is-visible"));
+      return;
+    }
+
+    if (!globalWindow.__landingRevealObserver) {
+      globalWindow.__landingRevealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        },
+        {
+          root: null,
+          threshold: 0.2,
+          rootMargin: "0px 0px -10% 0px",
+        }
+      );
+    }
+
+    const observer = globalWindow.__landingRevealObserver;
+    if (!observer) return;
+    targets.forEach((node) => observer.observe(node));
+  })();
+</script>

@@ -19,30 +19,30 @@ const avatars = [
 <section id="beneficios-online" class:list={["mx-auto w-full max-w-[1400px] py-16 md:py-24 lg:py-28 px-4", className]}>
   <div class="mx-auto flex w-full max-w-5xl flex-col items-center">
     <div class="flex max-w-xl flex-col items-center gap-4 text-center">
-      <span class="inline-flex items-center gap-3 text-sm font-mono text-foreground">
+      <span class="landing-reveal inline-flex items-center gap-3 text-sm font-mono text-foreground" data-reveal style="--reveal-delay: 20ms;">
         <span class="h-px w-8 bg-muted-foreground"></span>
         Atendimento Online
-      </span>      <h2 class="font-heading text-4xl font-medium leading-tight text-foreground md:text-5xl">
+      </span>      <h2 class="landing-reveal font-heading text-4xl font-medium leading-tight text-foreground md:text-5xl" data-reveal style="--reveal-delay: 100ms;">
         Bons motivos para investir em <span class="font-light italic text-muted-foreground">terapia online</span>
       </h2>
-      <p class="max-w-md text-base text-muted-foreground">
+      <p class="landing-reveal max-w-md text-base text-muted-foreground" data-reveal style="--reveal-delay: 180ms;">
         Cuide da sua saude emocional com praticidade, seguranca e no seu tempo.
       </p>
     </div>
 
     <div class="mt-12 grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-      <article class="flex h-full flex-col rounded-xl border border-border bg-muted p-8">
+      <article class="landing-reveal flex h-full flex-col rounded-xl py-8" data-reveal style="--reveal-delay: 260ms;">
         <div class="mb-7 flex flex-wrap gap-2">
           <span class="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-foreground">
-            <Zap className="size-3.5" aria-hidden="true" />
+            <Zap className="icon-draw size-3.5" aria-hidden="true" />
             Pratico
           </span>
           <span class="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-foreground">
-            <ShieldCheck className="size-3.5" aria-hidden="true" />
+            <ShieldCheck className="icon-draw size-3.5" aria-hidden="true" />
             Seguro
           </span>
           <span class="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-foreground">
-            <Atom className="size-3.5" aria-hidden="true" />
+            <Atom className="icon-draw size-3.5" aria-hidden="true" />
             Acessivel
           </span>
         </div>
@@ -53,11 +53,11 @@ const avatars = [
         </p>
         <a href="#marcar-consulta" class="mt-6 inline-flex items-center gap-2 text-base font-medium text-foreground">
           Ver como funciona
-          <ArrowRight className="size-4" aria-hidden="true" />
+          <ArrowRight className="icon-draw size-4" aria-hidden="true" />
         </a>
       </article>
 
-      <article class="flex h-full flex-col rounded-xl border border-border bg-muted p-8">
+      <article class="landing-reveal flex h-full flex-col rounded-xl py-8" data-reveal style="--reveal-delay: 340ms;">
         <div class="mb-7 inline-flex w-fit flex-col gap-1">
           <div class="flex items-center gap-1 text-amber-400">
             {Array.from({ length: 5 }).map(() => (
@@ -73,7 +73,7 @@ const avatars = [
         </p>
       </article>
 
-      <article class="flex h-full flex-col rounded-xl border border-border bg-muted p-8">
+      <article class="landing-reveal flex h-full flex-col rounded-xl py-8" data-reveal style="--reveal-delay: 420ms;">
         <div class="mb-7 flex items-start justify-between gap-3">
           <h3 class="font-heading text-2xl font-semibold text-foreground">Acolhimento</h3>
           <span class="inline-flex items-center rounded-md border border-border px-2 py-1 text-xs text-foreground">
@@ -86,20 +86,25 @@ const avatars = [
         </p>
         <div class="relative mt-8 flex items-center justify-between">
           {avatars.map((avatar, index) => (
-            <img
-              src={avatar}
-              alt={`Avatar ilustrado ${index + 1}`}
-              width="56"
-              height="56"
-              loading="lazy"
-              class="size-14 rounded-full object-cover"
-            />
+            <div
+              class="landing-reveal-media size-14 shrink-0 overflow-hidden rounded-full"
+              data-reveal-media
+              style={`--reveal-delay: ${index * 70}ms;`}
+            >
+              <img
+                src={avatar}
+                alt={`Avatar ilustrado ${index + 1}`}
+                width="56"
+                height="56"
+                loading="lazy"
+                class="landing-reveal-media__img size-14 rounded-full object-cover"
+              />
+            </div>
           ))}
-          <div class="pointer-events-none absolute inset-y-0 right-0 w-12 bg-linear-to-l from-muted to-transparent"></div>
         </div>
       </article>
 
-      <article class="flex h-full flex-col rounded-xl border border-border bg-muted p-8">
+      <article class="landing-reveal flex h-full flex-col rounded-xl py-8" data-reveal style="--reveal-delay: 500ms;">
         <div class="mb-7 flex justify-end">
           <span class="inline-flex items-center rounded-md border border-border px-2 py-1 text-xs text-foreground">
             Exclusivo
@@ -112,9 +117,15 @@ const avatars = [
         </p>
         <a href="#marcar-consulta" class="mt-6 inline-flex items-center gap-2 text-base font-medium text-foreground">
           Entenda o processo
-          <ArrowRight className="size-4" aria-hidden="true" />
+          <ArrowRight className="icon-draw size-4" aria-hidden="true" />
         </a>
       </article>
     </div>
   </div>
 </section>
+
+<script>
+  import { observeRevealsIn, initIconDrawIn } from "@/lib/landing-reveal"
+  observeRevealsIn("#beneficios-online")
+  initIconDrawIn("#beneficios-online")
+</script>

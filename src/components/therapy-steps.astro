@@ -32,12 +32,12 @@ const steps = [
 <section id="processo" class:list={["mx-auto w-full max-w-[1400px] py-16 md:py-24 lg:py-[98px] bg-mauve-600/10 rounded-2xl -translate-y-50 backdrop-blur-2xl px-4", className]}>
   <div class="flex flex-col items-center gap-14 md:gap-20 lg:gap-[100px]">
    <div class="flex flex-col items-center gap-4">
-    <span class="inline-flex items-center gap-3 text-sm font-mono text-foreground">
+    <span class="landing-reveal inline-flex items-center gap-3 text-sm font-mono text-foreground" data-reveal style="--reveal-delay: 20ms;">
       <span class="h-px w-8 bg-muted-foreground"></span>
       Processo
     </span>
 
-    <h2 class="w-full font-medium max-w-[681px] text-center font-heading text-3xl leading-tight tracking-[-1.2px] text-foreground md:text-4xl md:tracking-[-1.6px] lg:text-[48px] lg:tracking-[-1.92px]">
+    <h2 class="landing-reveal w-full font-medium max-w-[681px] text-center font-heading text-3xl leading-tight tracking-[-1.2px] text-foreground md:text-4xl md:tracking-[-1.6px] lg:text-[48px] lg:tracking-[-1.92px]" data-reveal style="--reveal-delay: 120ms;">
       <span class="font-heading font-light italic text-muted-foreground">Seu caminho</span>{" "}
       na terapia,
       <br class="hidden lg:block" />
@@ -50,13 +50,20 @@ const steps = [
       {
         steps.map((step, index) => (
           <div class:list={["flex w-full flex-col items-center gap-8 md:gap-12 lg:gap-[74px]", index % 2 === 1 && "lg:flex-row-reverse", index % 2 === 0 && "lg:flex-row"]}>
-            <div class="h-[240px] w-full max-w-[400px] shrink-0 rounded-2xl bg-[#f3f1f3] md:h-[300px] lg:h-[360px]" aria-hidden="true"></div>
+            <div
+              class="landing-reveal-media h-[240px] w-full max-w-[400px] shrink-0 overflow-hidden rounded-2xl md:h-[300px] lg:h-[360px]"
+              data-reveal-media
+              style={`--reveal-delay: ${index * 40}ms;`}
+              aria-hidden="true"
+            >
+              <div class="landing-reveal-media__img h-full w-full rounded-2xl bg-[#f3f1f3]"></div>
+            </div>
 
             <div class="flex w-full max-w-[399px] shrink-0 flex-col items-center gap-[15px] text-center leading-normal">
-              <p class="w-full font-heading text-[20px] font-semibold tracking-[-0.8px] text-foreground md:text-[20px]">
+              <p class="landing-reveal w-full font-heading text-[20px] font-semibold tracking-[-0.8px] text-foreground md:text-[20px]" data-reveal style={`--reveal-delay: ${80 + index * 40}ms;`}>
                 {step.title}
               </p>
-              <p class="w-full max-w-[320px] text-[16px] tracking-[-0.64px] text-muted-foreground">{step.description}</p>
+              <p class="landing-reveal w-full max-w-[320px] text-[16px] tracking-[-0.64px] text-muted-foreground" data-reveal style={`--reveal-delay: ${160 + index * 40}ms;`}>{step.description}</p>
             </div>
           </div>
         ))
@@ -64,3 +71,8 @@ const steps = [
     </div>
   </div>
 </section>
+
+<script>
+  import { observeRevealsIn } from "@/lib/landing-reveal"
+  observeRevealsIn("#processo")
+</script>

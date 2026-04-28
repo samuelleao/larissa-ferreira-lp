@@ -1,0 +1,89 @@
+/* Text blocks: fade + slight lift + scale (matches emotional-signs rhythm) */
+.landing-reveal {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0) scale(0.985);
+  transition:
+    opacity 560ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+    transform 560ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.landing-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* Image / visual blocks: same language as about-me hero image */
+.landing-reveal-media {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  transition:
+    opacity 650ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+    transform 650ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.landing-reveal-media__img {
+  transform: scale(1.085) translate3d(0, 10px, 0);
+  filter: saturate(0.92) blur(2px);
+  transition:
+    transform 1100ms cubic-bezier(0.22, 1, 0.36, 1) calc(80ms + var(--reveal-delay, 0ms)),
+    filter 900ms ease-out calc(80ms + var(--reveal-delay, 0ms));
+  will-change: transform, filter;
+}
+
+.landing-reveal-media.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.landing-reveal-media.is-visible .landing-reveal-media__img {
+  transform: scale(1) translate3d(0, 0, 0);
+  filter: saturate(1) blur(0);
+}
+
+/* Lucide stroke draw (emotional-signs pattern) */
+.icon-draw {
+  opacity: 0;
+  transition: opacity 120ms ease-out;
+}
+
+.icon-draw.is-draw-ready {
+  opacity: 1;
+}
+
+.icon-draw.is-draw-ready :is(path, line, polyline, polygon, circle, rect, ellipse) {
+  stroke-dasharray: var(--stroke-length, 1);
+  stroke-dashoffset: var(--stroke-length, 1);
+  transition: stroke-dashoffset 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--reveal-delay, 0ms) + 120ms);
+}
+
+.landing-reveal.is-visible .icon-draw.is-draw-ready :is(path, line, polyline, polygon, circle, rect, ellipse),
+.landing-reveal-media.is-visible .icon-draw.is-draw-ready :is(path, line, polyline, polygon, circle, rect, ellipse) {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-reveal,
+  .landing-reveal.is-visible,
+  .landing-reveal-media,
+  .landing-reveal-media.is-visible,
+  .landing-reveal-media__img {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .icon-draw.is-draw-ready :is(path, line, polyline, polygon, circle, rect, ellipse) {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+
+  .icon-draw,
+  .icon-draw.is-draw-ready {
+    opacity: 1;
+  }
+}
