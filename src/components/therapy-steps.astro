@@ -1,71 +1,69 @@
 ---
+import { AudioLines, Share2, Sunrise } from "lucide-react"
+
 export interface Props {
   class?: string
 }
 
 const { class: className } = Astro.props
 
-const steps = [
+type Step = {
+  title: string
+  description: string
+  icon: typeof Share2
+}
+
+const steps: Step[] = [
   {
-    title: "Primeiro contato",
-    description:
-      "Um espaço inicial para entender o que você está vivendo, tirar dúvidas e ver se a terapia faz sentido para você — sem pressão.",
+    title: "Clareza do próximo passo",
+    description: "Você entende com precisão o que fazer agora, sem sobrecarga mental.",
+    icon: Share2,
   },
   {
-    title: "Construção do vínculo",
-    description:
-      "Aos poucos, criamos um espaço seguro onde você pode se expressar com liberdade, no seu tempo e do seu jeito.",
+    title: "Plano simples para o dia",
+    description: "Organizamos seu processo em ações possíveis para manter consistência.",
+    icon: Sunrise,
   },
   {
-    title: "Entendimento e aprofundamento",
-    description:
-      "Exploramos padrões, emoções e situações que impactam sua vida, trazendo mais clareza sobre o que você sente e vive.",
+    title: "Expressão livre do que sente",
+    description: "Você fala com liberdade sobre o que está vivendo e transforma isso em direção.",
+    icon: AudioLines,
   },
-  {
-    title: "Mudanças e novos caminhos",
-    description:
-      "Com mais consciência, você começa a desenvolver novas formas de lidar com desafios e construir uma vida mais leve e alinhada.",
-  },
-] as const
+]
 ---
 
-<section id="processo" class:list={["mx-auto w-full max-w-[1400px] py-16 md:py-24 lg:py-[98px] bg-mauve-600/10 rounded-2xl -translate-y-50 backdrop-blur-2xl px-4", className]}>
-  <div class="flex flex-col items-center gap-14 md:gap-20 lg:gap-[100px]">
-   <div class="flex flex-col items-center gap-4">
+<section id="processo" class:list={["mx-auto w-full max-w-[1400px] py-16 md:py-24 lg:py-[98px] bg-primary/10 rounded-2xl -translate-y-50 backdrop-blur-2xl px-4", className]}>
+  <div class="flex flex-col items-center gap-14 md:gap-20 lg:gap-[72px]">
+   <div class="flex w-full max-w-[1080px] flex-col items-start gap-4">
     <span class="landing-reveal inline-flex items-center gap-3 text-sm font-mono text-foreground" data-reveal style="--reveal-delay: 20ms;">
       <span class="h-px w-8 bg-muted-foreground"></span>
       Processo
     </span>
 
-    <h2 class="landing-reveal w-full font-medium max-w-[681px] text-center font-heading text-3xl leading-tight tracking-[-1.2px] text-foreground md:text-4xl md:tracking-[-1.6px] lg:text-[48px] lg:tracking-[-1.92px]" data-reveal style="--reveal-delay: 120ms;">
-      <span class="font-heading font-light italic text-muted-foreground">Seu caminho</span>{" "}
-      na terapia,
-      <br class="hidden lg:block" />
-      <span class="lg:hidden"> </span>
-      passo a passo
+    <p class="landing-reveal max-w-[440px] text-balance text-[40px] leading-tight tracking-[-1.2px] text-muted-foreground md:text-[44px]" data-reveal style="--reveal-delay: 120ms;">
+      Cuidar de si não precisa ser confuso
+    </p>
+
+    <h2 class="landing-reveal w-full max-w-[980px] font-heading text-4xl font-medium leading-tight tracking-[-1.8px] text-foreground md:text-5xl lg:text-4xl lg:tracking-[-2px]" data-reveal style="--reveal-delay: 180ms;">
+      Terapia estruturada de forma simples
     </h2>
    </div>
 
-    <div class="flex w-full max-w-[874px] flex-col items-start gap-16 md:gap-20 lg:gap-[108px]">
+    <div class="grid w-full max-w-[1080px] grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {
         steps.map((step, index) => (
-          <div class:list={["flex w-full flex-col items-center gap-8 md:gap-12 lg:gap-[74px]", index % 2 === 1 && "lg:flex-row-reverse", index % 2 === 0 && "lg:flex-row"]}>
-            <div
-              class="landing-reveal-media h-[240px] w-full max-w-[400px] shrink-0 overflow-hidden rounded-2xl md:h-[300px] lg:h-[360px]"
-              data-reveal-media
-              style={`--reveal-delay: ${index * 40}ms;`}
-              aria-hidden="true"
-            >
-              <div class="landing-reveal-media__img h-full w-full rounded-2xl bg-[#f3f1f3]"></div>
+          <article class="landing-reveal rounded-2xl bg-white p-7 md:p-8" data-reveal style={`--reveal-delay: ${220 + index * 80}ms;`}>
+            <div class="mb-20 md:mb-24">
+              <step.icon className="icon-draw size-7 text-foreground" aria-hidden="true" />
             </div>
 
-            <div class="flex w-full max-w-[399px] shrink-0 flex-col items-center gap-[15px] text-center leading-normal">
-              <p class="landing-reveal w-full font-heading text-[20px] font-semibold tracking-[-0.8px] text-foreground md:text-[20px]" data-reveal style={`--reveal-delay: ${80 + index * 40}ms;`}>
+            <div class="flex flex-col gap-3 leading-normal">
+              <p class="w-full font-heading text-[30px] font-semibold tracking-[-0.8px] text-foreground md:text-[22px]">
                 {step.title}
               </p>
-              <p class="landing-reveal w-full max-w-[320px] text-[16px] tracking-[-0.64px] text-muted-foreground" data-reveal style={`--reveal-delay: ${160 + index * 40}ms;`}>{step.description}</p>
+              <p class="w-full max-w-[320px] text-[20px] tracking-[-0.64px] text-muted-foreground">{step.description}</p>
             </div>
-          </div>
+          </article>
         ))
       }
     </div>
@@ -73,6 +71,7 @@ const steps = [
 </section>
 
 <script>
-  import { observeRevealsIn } from "@/lib/landing-reveal"
+  import { initIconDrawIn, observeRevealsIn } from "@/lib/landing-reveal"
   observeRevealsIn("#processo")
+  initIconDrawIn("#processo")
 </script>

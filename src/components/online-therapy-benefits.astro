@@ -1,28 +1,43 @@
 ---
-import { ArrowRight, Atom, ShieldCheck, Star, Zap } from "lucide-react"
-
 export interface Props {
   class?: string
 }
 
 const { class: className } = Astro.props
 
-const avatars = [
-  "https://www.figma.com/api/mcp/asset/f59eac9a-c5d8-48a3-835d-f2d02e7cd956",
-  "https://www.figma.com/api/mcp/asset/8dc2b6ae-6fa0-4755-a6d1-f0f5b66eac1f",
-  "https://www.figma.com/api/mcp/asset/4e52afda-4fa7-4eaa-9cd4-5b3fa75921e8",
-  "https://www.figma.com/api/mcp/asset/efe31e5d-6bff-4156-82d7-d6f58e324ff9",
-  "https://www.figma.com/api/mcp/asset/2ebee95f-83af-46e9-9c02-ef9366d8cf66",
-]
+const benefitCards = [
+  {
+    title: "Terapia sem sair de casa",
+    description: "A terapia te ajuda a transformar sobrecarga em passos claros e viáveis para o seu momento.",
+    image: "/first-contact.png",
+    benefitLabel: "Benefício 1",
+    insight: "Atendimento online com a mesma efetividade da presencial.",
+  },
+  {
+    title: "Acolhimento",
+    description: "Você organiza sua rotina emocional com direção prática para manter constância no processo.",
+    image: "/first-contact.png",
+    benefitLabel: "Benefício 2",
+    insight: "Escuta ativa e vínculo terapêutico no seu ritmo.",
+  },
+  {
+    title: "Processo estruturado e personalizado",
+    description: "Você expressa o que sente com liberdade e converte isso em mudanças reais na sua rotina.",
+    image: "/first-contact.png",
+    benefitLabel: "Benefício 3",
+    insight: "Plano claro com metas adaptadas ao seu momento de vida.",
+  },
+] as const
 ---
 
-<section id="beneficios-online" class:list={["mx-auto w-full max-w-[1400px] py-16 md:py-24 lg:py-28 px-4", className]}>
-  <div class="mx-auto flex w-full max-w-5xl flex-col items-center">
-    <div class="flex max-w-xl flex-col items-center gap-4 text-center">
+<section id="beneficios-online" class:list={["mx-auto w-full max-w-[1400px] py-16 md:py-24 lg:py-28 px-4 transition-colors duration-700 ease-out bg-white rounded-2xl", className]}>
+  <div class="mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:items-start lg:gap-12">
+    <div class="flex flex-col gap-4 lg:sticky lg:top-[50svh] lg:-translate-y-1/2">
       <span class="landing-reveal inline-flex items-center gap-3 text-sm font-mono text-foreground" data-reveal style="--reveal-delay: 20ms;">
         <span class="h-px w-8 bg-muted-foreground"></span>
         Atendimento Online
-      </span>      <h2 class="landing-reveal font-heading text-4xl font-medium leading-tight text-foreground md:text-5xl" data-reveal style="--reveal-delay: 100ms;">
+      </span>
+      <h2 class="landing-reveal font-heading text-4xl font-medium leading-tight text-foreground md:text-5xl" data-reveal style="--reveal-delay: 100ms;">
         Bons motivos para investir em <span class="font-light italic text-muted-foreground">terapia online</span>
       </h2>
       <p class="landing-reveal max-w-md text-base text-muted-foreground" data-reveal style="--reveal-delay: 180ms;">
@@ -30,102 +45,146 @@ const avatars = [
       </p>
     </div>
 
-    <div class="mt-12 grid w-full grid-cols-1 gap-6 md:grid-cols-2">
-      <article class="landing-reveal flex h-full flex-col rounded-xl py-8" data-reveal style="--reveal-delay: 260ms;">
-        <div class="mb-7 flex flex-wrap gap-2">
-          <span class="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-foreground">
-            <Zap className="icon-draw size-3.5" aria-hidden="true" />
-            Pratico
-          </span>
-          <span class="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-foreground">
-            <ShieldCheck className="icon-draw size-3.5" aria-hidden="true" />
-            Seguro
-          </span>
-          <span class="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-foreground">
-            <Atom className="icon-draw size-3.5" aria-hidden="true" />
-            Acessivel
-          </span>
-        </div>
-        <h3 class="font-heading text-2xl font-semibold text-foreground">Terapia sem sair de casa</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
-          Faca suas sessoes de onde estiver, com total conforto e privacidade. Ideal para rotinas corridas ou para quem
-          prefere um ambiente mais acolhedor.
-        </p>
-        <a href="#marcar-consulta" class="mt-6 inline-flex items-center gap-2 text-base font-medium text-foreground">
-          Ver como funciona
-          <ArrowRight className="icon-draw size-4" aria-hidden="true" />
-        </a>
-      </article>
-
-      <article class="landing-reveal flex h-full flex-col rounded-xl py-8" data-reveal style="--reveal-delay: 340ms;">
-        <div class="mb-7 inline-flex w-fit flex-col gap-1">
-          <div class="flex items-center gap-1 text-amber-400">
-            {Array.from({ length: 5 }).map(() => (
-              <Star className="size-4 fill-current" aria-hidden="true" />
-            ))}
-          </div>
-          <p class="text-sm text-muted-foreground">+ de 20 pacientes atendidos</p>
-        </div>
-        <h3 class="font-heading text-2xl font-semibold text-foreground">Resultados reais na sua rotina</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
-          A terapia online e tao eficaz quanto a presencial e se adapta ao seu dia a dia, aumentando a consistencia e
-          os resultados ao longo do tempo.
-        </p>
-      </article>
-
-      <article class="landing-reveal flex h-full flex-col rounded-xl py-8" data-reveal style="--reveal-delay: 420ms;">
-        <div class="mb-7 flex items-start justify-between gap-3">
-          <h3 class="font-heading text-2xl font-semibold text-foreground">Acolhimento</h3>
-          <span class="inline-flex items-center rounded-md border border-border px-2 py-1 text-xs text-foreground">
-            Atendimento Humanizado
-          </span>
-        </div>
-        <p class="text-sm leading-relaxed text-muted-foreground">
-          Cada pessoa e unica. O processo terapeutico e construido com escuta ativa, empatia e respeito ao seu tempo e
-          as suas necessidades.
-        </p>
-        <div class="relative mt-8 flex items-center justify-between">
-          {avatars.map((avatar, index) => (
-            <div
-              class="landing-reveal-media size-14 shrink-0 overflow-hidden rounded-full"
-              data-reveal-media
-              style={`--reveal-delay: ${index * 70}ms;`}
+    <div class="relative w-full">
+      <div class="sticky top-[50svh] z-10 -translate-y-1/2">
+        <div class="relative mx-auto min-h-[430px] w-full max-w-[640px] md:min-h-[420px]">
+          {benefitCards.map((card, index) => (
+            <article
+              class:list={[
+                "absolute inset-0 rounded-3xl border border-border/70 bg-white p-3 shadow-[0_0.602187px_1.80656px_-1.25px_rgba(0,0,0,0.07),0_2.28853px_6.8656px_-2.5px_rgba(0,0,0,0.06),0_10px_30px_-3.75px_rgba(0,0,0,0.03)] transition-all duration-500 ease-out md:p-4",
+                "pointer-events-none opacity-0 translate-y-6 scale-[0.975]",
+                index === 0 && "pointer-events-auto opacity-100 translate-y-0 scale-100 z-30 shadow-[0_18px_40px_rgba(15,23,42,0.12)]",
+              ]}
+              data-stack-card
+              data-index={index}
             >
-              <img
-                src={avatar}
-                alt={`Avatar ilustrado ${index + 1}`}
-                width="56"
-                height="56"
-                loading="lazy"
-                class="landing-reveal-media__img size-14 rounded-full object-cover"
-              />
-            </div>
+              <div class="grid h-full gap-3 md:grid-cols-[minmax(0,230px)_1fr] md:gap-4">
+                <div class="h-full overflow-hidden rounded-2xl border border-border/40 bg-white">
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    width="230"
+                    height="360"
+                    loading="lazy"
+                    class="h-full w-full object-cover"
+                  />
+                </div>
+
+                <div class="flex h-full flex-col gap-2 py-1 md:pr-3">
+                  <div class="space-y-2 rounded-xl bg-white">
+                    <p class="text-sm leading-5 text-muted-foreground/80">{card.benefitLabel}</p>
+                    <h3 class="font-heading text-lg font-semibold tracking-[-0.3px] text-foreground md:text-[24px] md:leading-8">
+                      {card.title}
+                    </h3>
+                    <p class="max-w-[34ch] text-sm leading-6 text-muted-foreground">
+                      {card.description}
+                    </p>
+                  </div>
+
+                  <div class="mt-auto flex items-center justify-between rounded-xl border border-border/60 bg-white/90 px-3 py-2">
+                    <div class="inline-flex items-center gap-2 text-sm text-muted-foreground">
+                      <span class="inline-flex size-4 items-center justify-center rounded-full border border-border text-[10px]">+</span>
+                      Curiosidade
+                    </div>
+                    <div class="inline-flex max-w-[180px] items-center gap-2 rounded-lg bg-muted/50 px-2 py-1">
+                      <img src={card.image} alt={card.benefitLabel} width="20" height="20" loading="lazy" class="size-5 rounded-md object-cover" />
+                      <span class="truncate text-xs font-medium text-foreground">{card.insight}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
           ))}
         </div>
-      </article>
+      </div>
 
-      <article class="landing-reveal flex h-full flex-col rounded-xl py-8" data-reveal style="--reveal-delay: 500ms;">
-        <div class="mb-7 flex justify-end">
-          <span class="inline-flex items-center rounded-md border border-border px-2 py-1 text-xs text-foreground">
-            Exclusivo
-          </span>
-        </div>
-        <h3 class="font-heading text-2xl font-semibold text-foreground">Processo estruturado e personalizado</h3>
-        <p class="mt-2 text-sm leading-relaxed text-muted-foreground">
-          As sessoes seguem uma abordagem organizada, com objetivos claros e evolucao continua, sempre respeitando o
-          seu momento.
-        </p>
-        <a href="#marcar-consulta" class="mt-6 inline-flex items-center gap-2 text-base font-medium text-foreground">
-          Entenda o processo
-          <ArrowRight className="icon-draw size-4" aria-hidden="true" />
-        </a>
-      </article>
+      <div class="grid" aria-hidden="true">
+        {benefitCards.map((_, index) => (
+          <div class="h-[70svh] md:h-[75svh]" data-stack-trigger data-index={index}></div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
 
 <script>
-  import { observeRevealsIn, initIconDrawIn } from "@/lib/landing-reveal"
+  import { observeRevealsIn } from "@/lib/landing-reveal"
   observeRevealsIn("#beneficios-online")
-  initIconDrawIn("#beneficios-online")
+
+  const section = document.querySelector<HTMLElement>("#beneficios-online")
+  if (section) {
+    const cards = Array.from(section.querySelectorAll<HTMLElement>("[data-stack-card]"))
+    const triggers = Array.from(section.querySelectorAll<HTMLElement>("[data-stack-trigger]"))
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const sectionBackgrounds = ["bg-white", "bg-[#F1E4D7]", "bg-[#E8E1DA]"]
+
+    const resetClasses = [
+      "pointer-events-none",
+      "pointer-events-auto",
+      "opacity-0",
+      "opacity-100",
+      "translate-y-6",
+      "translate-y-0",
+      "-translate-y-4",
+      "-translate-y-8",
+      "scale-[0.975]",
+      "scale-100",
+      "scale-[0.985]",
+      "scale-[0.97]",
+      "z-10",
+      "z-20",
+      "z-30",
+      "shadow-sm",
+      "shadow-[0_18px_40px_rgba(15,23,42,0.12)]",
+    ]
+
+    const activate = (index: number) => {
+      section.classList.remove(...sectionBackgrounds)
+      section.classList.add(sectionBackgrounds[index] ?? sectionBackgrounds[0])
+
+      cards.forEach((card, cardIndex) => {
+        card.classList.remove(...resetClasses)
+
+        const diff = cardIndex - index
+        if (diff === 0) {
+          card.classList.add("pointer-events-auto", "opacity-100", "translate-y-0", "scale-100", "z-30", "shadow-[0_18px_40px_rgba(15,23,42,0.12)]")
+          return
+        }
+
+        if (diff === 1) {
+          card.classList.add("pointer-events-none", "opacity-100", "-translate-y-4", "scale-[0.985]", "z-20", "shadow-sm")
+          return
+        }
+
+        if (diff === 2) {
+          card.classList.add("pointer-events-none", "opacity-100", "-translate-y-8", "scale-[0.97]", "z-10", "shadow-sm")
+          return
+        }
+
+        card.classList.add("pointer-events-none", "opacity-0", "translate-y-6", "scale-[0.975]", "shadow-sm")
+      })
+    }
+
+    if (cards.length && triggers.length) {
+      if (reducedMotion) {
+        activate(0)
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return
+              const indexValue = Number(entry.target.getAttribute("data-index") || 0)
+              activate(indexValue)
+            })
+          },
+          {
+            threshold: 0.55,
+            rootMargin: "-20% 0px -20% 0px",
+          }
+        )
+
+        triggers.forEach((trigger) => observer.observe(trigger))
+      }
+    }
+  }
 </script>
