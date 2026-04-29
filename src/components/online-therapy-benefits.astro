@@ -16,21 +16,21 @@ const benefitCards = [
   {
     title: "Acolhimento",
     description: "Você organiza sua rotina emocional com direção prática para manter constância no processo.",
-    image: "/first-contact.png",
+    image: "/benefit-2.png",
     benefitLabel: "Benefício 2",
     insight: "Escuta ativa e vínculo terapêutico no seu ritmo.",
   },
   {
     title: "Processo estruturado e personalizado",
     description: "Você expressa o que sente com liberdade e converte isso em mudanças reais na sua rotina.",
-    image: "/first-contact.png",
+    image: "/benefit-3.png",
     benefitLabel: "Benefício 3",
     insight: "Plano claro com metas adaptadas ao seu momento de vida.",
   },
 ] as const
 ---
 
-<section id="beneficios-online" class:list={["mx-auto w-full max-w-[1400px] py-16 md:py-24 lg:py-28 px-4 transition-colors duration-700 ease-out bg-white rounded-2xl", className]}>
+<section id="beneficios-online" class:list={["relative left-1/2 w-screen -translate-x-1/2 py-16 md:py-24 lg:py-28 px-4 transition-colors duration-700 ease-out bg-white", className]}>
   <div class="mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:items-start lg:gap-12">
     <div class="flex flex-col gap-4 lg:sticky lg:top-[50svh] lg:-translate-y-1/2">
       <span class="landing-reveal inline-flex items-center gap-3 text-sm font-mono text-foreground" data-reveal style="--reveal-delay: 20ms;">
@@ -46,14 +46,15 @@ const benefitCards = [
     </div>
 
     <div class="relative w-full">
-      <div class="sticky top-[50svh] z-10 -translate-y-1/2">
-        <div class="relative mx-auto min-h-[430px] w-full max-w-[640px] md:min-h-[420px]">
+      <div class="sticky top-20 z-10 md:top-[50svh] md:-translate-y-1/2">
+        <div class="relative mx-auto min-h-[560px] w-full max-w-[640px] sm:min-h-[520px] md:min-h-[420px]">
           {benefitCards.map((card, index) => (
             <article
               class:list={[
-                "absolute inset-0 rounded-3xl border border-border/70 bg-white p-3 shadow-[0_0.602187px_1.80656px_-1.25px_rgba(0,0,0,0.07),0_2.28853px_6.8656px_-2.5px_rgba(0,0,0,0.06),0_10px_30px_-3.75px_rgba(0,0,0,0.03)] transition-all duration-500 ease-out md:p-4",
-                "pointer-events-none opacity-0 translate-y-6 scale-[0.975]",
+                "absolute inset-0 rounded-3xl border border-border/70 bg-white p-3 shadow-[0_0.602187px_1.80656px_-1.25px_rgba(0,0,0,0.07),0_2.28853px_6.8656px_-2.5px_rgba(0,0,0,0.06),0_10px_30px_-3.75px_rgba(0,0,0,0.03)] transition-all duration-700 ease-out md:p-4",
                 index === 0 && "pointer-events-auto opacity-100 translate-y-0 scale-100 z-30 shadow-[0_18px_40px_rgba(15,23,42,0.12)]",
+                index === 1 && "pointer-events-none opacity-100 translate-y-6 scale-[0.985] z-20 shadow-sm",
+                index === 2 && "pointer-events-none opacity-100 translate-y-10 scale-[0.97] z-10 shadow-sm",
               ]}
               data-stack-card
               data-index={index}
@@ -100,7 +101,7 @@ const benefitCards = [
 
       <div class="grid" aria-hidden="true">
         {benefitCards.map((_, index) => (
-          <div class="h-[70svh] md:h-[75svh]" data-stack-trigger data-index={index}></div>
+          <div class="h-[42svh] md:h-[50svh]" data-stack-trigger data-index={index}></div>
         ))}
       </div>
     </div>
@@ -123,11 +124,12 @@ const benefitCards = [
       "pointer-events-auto",
       "opacity-0",
       "opacity-100",
+      "translate-y-16",
+      "translate-y-10",
       "translate-y-6",
+      "translate-y-8",
       "translate-y-0",
-      "-translate-y-4",
-      "-translate-y-8",
-      "scale-[0.975]",
+      "scale-[0.965]",
       "scale-100",
       "scale-[0.985]",
       "scale-[0.97]",
@@ -152,16 +154,16 @@ const benefitCards = [
         }
 
         if (diff === 1) {
-          card.classList.add("pointer-events-none", "opacity-100", "-translate-y-4", "scale-[0.985]", "z-20", "shadow-sm")
+          card.classList.add("pointer-events-none", "opacity-100", "translate-y-6", "scale-[0.985]", "z-20", "shadow-sm")
           return
         }
 
         if (diff === 2) {
-          card.classList.add("pointer-events-none", "opacity-100", "-translate-y-8", "scale-[0.97]", "z-10", "shadow-sm")
+          card.classList.add("pointer-events-none", "opacity-100", "translate-y-10", "scale-[0.97]", "z-10", "shadow-sm")
           return
         }
 
-        card.classList.add("pointer-events-none", "opacity-0", "translate-y-6", "scale-[0.975]", "shadow-sm")
+        card.classList.add("pointer-events-none", "opacity-0", "translate-y-16", "scale-[0.965]", "shadow-sm")
       })
     }
 
@@ -178,8 +180,8 @@ const benefitCards = [
             })
           },
           {
-            threshold: 0.55,
-            rootMargin: "-20% 0px -20% 0px",
+            threshold: 0.35,
+            rootMargin: "-10% 0px -10% 0px",
           }
         )
 

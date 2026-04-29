@@ -23,15 +23,14 @@ const links = [
   ]}
   aria-label="Navegação principal"
 >
-<div class="flex flex-row items-center gap-8">
-  <span class="inline-flex items-center gap-2  font-medium text-white">
+  <span class="inline-flex items-center gap-0  font-medium text-white">
     <span class="font-semibold">
-      <span class="text-white  text-xl tracking-[-0.64px]">Larissa</span> 
+      <span class="text-white  text-xl tracking-[-0.64px]">Larissa.</span> 
       <span class="text-white/80 font-normal italic">Ferreira</span>
     </span>
   
   </span>
-  <div class="flex flex-row items-center gap-8">
+  <div class="flex flex-row items-center gap-8 absolute -translate-x-1/2 left-1/2">
       {
           links.map(({ href, label }) => (
             <a
@@ -43,10 +42,76 @@ const links = [
           ))
         }
   </div>
-</div>
-  <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline">
-    <Button client:load variant="default" size="lg" nativeButton={false}>
-      Marcar consulta
-    </Button>
-  </a>
+  <div class="flex flex-row items-center gap-8">
+    <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline text-white">
+      Abordagem
+    </a>
+    <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline">
+      <Button client:load variant="default" size="lg" nativeButton={false}>
+        Marcar consulta
+      </Button>
+    </a>
+  </div>
 </nav>
+
+<nav
+  id="secondary-menu"
+  class="fixed left-1/2 top-4 z-50 flex w-[calc(100%-2rem)] max-w-[1200px] -translate-x-1/2 items-center justify-between rounded-full border border-white/60 bg-white/70 pl-8 pr-2 py-2 shadow-lg shadow-black/5 backdrop-blur-md transition-all duration-300"
+  style="opacity: 0; pointer-events: none;"
+  aria-label="Navegação secundária"
+>
+  <span class="inline-flex items-center gap-0 font-medium text-slate-900">
+    <span class="font-semibold">
+      <span class="text-xl tracking-[-0.64px] text-slate-900">Larissa.</span>
+      <span class="font-normal italic text-slate-700">Ferreira</span>
+    </span>
+  </span>
+  <div class="absolute left-1/2 flex -translate-x-1/2 flex-row items-center gap-8">
+    {
+      links.map(({ href, label }) => (
+        <a
+          href={href}
+          class="flex h-11 shrink-0 items-center justify-center font-heading text-sm font-medium tracking-[-0.64px] text-slate-800 no-underline transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          {label}
+        </a>
+      ))
+    }
+  </div>
+  <div class="flex flex-row items-center gap-8">
+    <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline text-slate-800">
+      Abordagem
+    </a>
+    <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline">
+      <Button client:load variant="default" size="lg" nativeButton={false}>
+        Marcar consulta
+      </Button>
+    </a>
+  </div>
+</nav>
+
+<script is:inline>
+  (() => {
+    const updateSecondaryMenu = () => {
+      const secondaryMenu = document.getElementById("secondary-menu")
+      const triggerSection = document.getElementById("emocoes")
+      if (!secondaryMenu || !triggerSection) return
+
+      const triggerSectionTop = triggerSection.getBoundingClientRect().top
+      const shouldShow = triggerSectionTop <= 0
+
+      secondaryMenu.style.setProperty("opacity", shouldShow ? "1" : "0", "important")
+      secondaryMenu.style.setProperty("pointer-events", shouldShow ? "auto" : "none", "important")
+    }
+
+    updateSecondaryMenu()
+
+    if (!window.__secondaryMenuBound) {
+      window.__secondaryMenuBound = true
+      window.addEventListener("scroll", updateSecondaryMenu, { passive: true })
+      window.addEventListener("resize", updateSecondaryMenu)
+      document.addEventListener("astro:page-load", updateSecondaryMenu)
+      window.setInterval(updateSecondaryMenu, 250)
+    }
+  })()
+</script>
