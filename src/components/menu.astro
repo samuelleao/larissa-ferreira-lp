@@ -30,7 +30,7 @@ const links = [
     </span>
   
   </span>
-  <div class="flex flex-row items-center gap-8 absolute -translate-x-1/2 left-1/2">
+  <div class="absolute left-1/2 hidden -translate-x-1/2 flex-row items-center gap-8 md:flex">
       {
           links.map(({ href, label }) => (
             <a
@@ -43,7 +43,7 @@ const links = [
         }
   </div>
   <div class="flex flex-row items-center gap-8">
-    <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline text-white">
+    <a href="#marcar-consulta" class="hidden shrink-0 no-underline text-white md:inline-flex">
       Abordagem
     </a>
     <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline">
@@ -66,7 +66,7 @@ const links = [
       <span class="font-normal italic text-slate-700">Ferreira</span>
     </span>
   </span>
-  <div class="absolute left-1/2 flex -translate-x-1/2 flex-row items-center gap-8">
+  <div class="absolute left-1/2 hidden -translate-x-1/2 flex-row items-center gap-8 md:flex">
     {
       links.map(({ href, label }) => (
         <a
@@ -79,7 +79,7 @@ const links = [
     }
   </div>
   <div class="flex flex-row items-center gap-8">
-    <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline text-slate-800">
+    <a href="#marcar-consulta" class="hidden shrink-0 no-underline text-slate-800 md:inline-flex">
       Abordagem
     </a>
     <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline">
