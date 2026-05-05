@@ -13,16 +13,25 @@ const { class: className } = Astro.props
   id="inicio"
   class:list={["js-reveal-root relative left-1/2 w-screen -translate-x-1/2", className]}
 >
-  <div class="relative min-h-[calc(50dvh)] md:min-h-[calc(100dvh+10rem)] overflow-hidden">
-    <img
+  <div class="md:min-h-dvh overflow-hidden bg-primary">
+      <img
       src="/cover-video.png"
       alt="Imagem de destaque do atendimento online"
-      class="absolute inset-0 h-full w-full object-cover"
+      class="md:absolute inset-0 h-full w-full object-cover"
       loading="eager"
     />
-    <div class="absolute inset-0 bg-black/35"></div>
 
-    <div class="relative z-10 flex min-h-screen flex-col justify-end p-6 pt-24 md:p-10 md:pt-28">
+  
+  <img
+  src="/illustration.png"
+  alt="Imagem de destaque do atendimento online"
+  class="absolute bottom-0 w-full object-cover block md:hidden"
+  loading="eager"
+/>
+
+    <div class="absolute inset-0 bg-black/35 hidden md:block"></div>
+
+    <div class="md:absolute bottom-0 py-20 inset-0 z-10 flex min-h-full flex-col justify-end p-6  md:p-10 md:pt-28">
      
 
       <div class="mx-auto flex max-w-4xl flex-col items-center text-center">
@@ -72,7 +81,7 @@ const { class: className } = Astro.props
       </div>
     </div>
   </div>
-  <div class="bg-white h-10 rounded-t-3xl w-full absolute bottom-0 "></div>
+  <div class="bg-white h-10 rounded-t-3xl w-full absolute bottom-0 hidden md:block"></div>
 
 </section>
 

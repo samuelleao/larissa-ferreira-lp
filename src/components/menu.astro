@@ -1,5 +1,6 @@
 ---
 import { Button } from "@/components/ui/button"
+import { CalendarDaysIcon } from "lucide-react"
 
 export interface Props {
   class?: string
@@ -84,6 +85,7 @@ const links = [
     </a>
     <a href="#marcar-consulta" class="inline-flex shrink-0 no-underline">
       <Button client:load variant="default" size="lg" nativeButton={false}>
+        <CalendarDaysIcon aria-hidden="true" />
         Marcar consulta
       </Button>
     </a>

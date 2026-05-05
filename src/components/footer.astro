@@ -3,6 +3,7 @@ export interface Props {
   class?: string
 }
 
+import { ArrowUp } from "lucide-react"
 import { Button } from "./ui/button"
 const { class: className } = Astro.props
 
@@ -23,32 +24,23 @@ const supportLinks = [
 ] as const
 ---
 
-<footer class:list={["mx-auto mt-16 w-full max-w-[1400px] overflow-hidden rounded-2xl   text-zinc-100", className]}>
+<footer class:list={["mx-auto  relative mt-16 w-full max-w-[900px] overflow-hidden    text-zinc-100", className]}>
 
-  <section id="contato" class="border-y border-black/10 px-6 py-10 md:px-10">
+  <section id="contato" class="px-6 py-10 md:px-10">
     <div id="marcar-consulta" class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-      <div class="landing-reveal max-w-xl" data-reveal style="--reveal-delay: 20ms;">
-        <h2 class="mt-2 font-heading text-2xl font-medium text-black md:text-3xl">Vamos iniciar seu processo terapêutico?</h2>
-        <p class="mt-2 text-sm text-muted-foreground">
-          Se você sentiu que este espaço faz sentido para o seu momento, o próximo passo é agendar a primeira conversa.
+      <div class="landing-reveal" data-reveal style="--reveal-delay: 40ms;">
+        <p class="text-lg font-semibold text-black">Larissa Ferreira</p>
+        <p class="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
+          Psicóloga clínica com atendimento online, acolhedor e baseado em Terapia Cognitivo-Comportamental.
         </p>
       </div>
-      <Button 
-      variant="default"
-      size="lg"
-      className="">
-        Quero agendar minha sessão
-      </Button>
-    </div>
+     
   </section>
 
-  <div class="grid gap-8 px-6 py-10 md:grid-cols-3 md:px-10">
-    <div class="landing-reveal" data-reveal style="--reveal-delay: 40ms;">
-      <p class="text-lg font-semibold text-black">Larissa Ferreira</p>
-      <p class="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-        Psicóloga clínica com atendimento online, acolhedor e baseado em Terapia Cognitivo-Comportamental.
-      </p>
-    </div>
+  
+
+  <div class=" md:px-10 grid md:grid-cols-2 gap-4 px-6 ">
+
 
     <div class="landing-reveal" data-reveal style="--reveal-delay: 100ms;">
       <p class="text-sm font-semibold text-mauve-600">Navegação</p>
@@ -81,11 +73,20 @@ const supportLinks = [
     </div>
   </div>
 
-  <div class="landing-reveal flex flex-col gap-2 border-t border-black/10 px-6 py-4 text-xs text-zinc-500 md:flex-row md:items-center md:justify-between md:px-10" data-reveal style="--reveal-delay: 80ms;">
+  <div class="landing-reveal flex flex-col gap-8 px-6 py-20 text-xs text-zinc-500 md:flex-row md:items-center md:justify-between md:px-10" data-reveal style="--reveal-delay: 80ms;">
     <p>© {currentYear} Larissa Ferreira. Todos os direitos reservados.</p>
-    <a href="#inicio" class="text-zinc-500 no-underline transition hover:text-mauve-600">Voltar ao topo</a>
+    <Button variant="outline" size="sm" className="w-max">
+      <ArrowUp aria-hidden="true" />
+      Voltar ao topo
+    </Button>
   </div>
 </footer>
+<img
+src="/footer.png"
+alt="Imagem de destaque do atendimento online"
+class=" bottom-0 w-full z-10 object-cover  "
+loading="lazy"
+/>
 
 <script>
   import { observeRevealsIn } from "@/lib/landing-reveal"
